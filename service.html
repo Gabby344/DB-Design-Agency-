@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | DB Agency - Design UI/UX et Branding</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* VARIABLES GLOBALES */
+        :root {
+            --white: #FFFFFF;
+            --black: #1A1A1A;
+            --accent: #00CED1; /* Cyan Sombre pour l'énergie */
+            --accent-dark: #00A9AB;
+            --light-grey: #F5F5F5;
+            --dark-grey: #4A4A4A;
+            --font-heading: 'Helvetica Neue', Arial, sans-serif;
+            --font-body: 'Arial', sans-serif;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --shadow-pro: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: 0.3s ease-in-out;
+            --border-radius: 8px;
+        }
+
+        /* BASE ET TYPOGRAPHIE (Identique aux autres pages) */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--black);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h2 { font-size: clamp(2.5em, 5vw, 3.5em); }
+        h3 { font-size: clamp(1.8em, 4vw, 2.5em); }
+        h4 { font-size: 1.6em; font-weight: 800; }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+        a:hover {
+            color: var(--accent-dark);
+        }
+
+        .section-padded {
+            padding: 80px 0;
+        }
+        
+        /* --- NAVIGATION --- */
+        nav {
+            background-color: var(--white);
+            padding: 20px 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 900;
+            color: var(--black);
+        }
+        .accent-dot {
+            color: var(--accent);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+        nav a {
+            font-weight: 600;
+            font-size: 1.05em;
+            padding: 5px 0;
+            position: relative;
+            color: var(--dark-grey);
+        }
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width var(--transition);
+        }
+        nav a:hover:after, nav a.active:after {
+            width: 100%;
+        }
+
+        /* --- BOUTONS GÉNÉRIQUES --- */
+        .btn {
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            display: inline-block;
+            transition: all var(--transition);
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-align: center;
+        }
+        .primary-btn {
+            background-color: var(--accent);
+            color: var(--black);
+        }
+        .primary-btn:hover {
+            background-color: var(--accent-dark);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        .small-btn {
+            padding: 8px 18px;
+            font-size: 0.9em;
+        }
+        .btn i {
+            margin-left: 8px;
+        }
+
+        /* --- HEADER PAGE (Sauf Accueil) --- */
+        .page-header {
+            background-color: var(--light-grey);
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .page-header h2 {
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .page-header p {
+            font-size: 1.2em;
+            color: var(--dark-grey);
+        }
+
+        /* --- BLOCS SERVICES DÉTAILLÉS --- */
+        .service-block {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            background-color: var(--white);
+        }
+        .service-block:nth-child(even) { /* Inversion pour un design pro */
+            flex-direction: row-reverse;
+            background-color: var(--light-grey);
+        }
+        
+        .service-icon-box {
+            flex-shrink: 0;
+            width: 150px;
+            height: 150px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .service-icon-box i {
+            font-size: 3.5em;
+            color: var(--black);
+        }
+
+        .service-content {
+            flex-grow: 1;
+            text-align: left;
+        }
+        .service-content h4 {
+            margin-bottom: 15px;
+            color: var(--accent-dark);
+        }
+        .service-content p {
+            color: var(--dark-grey);
+            margin-bottom: 15px;
+        }
+        .service-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .service-content li {
+            margin-bottom: 8px;
+            color: var(--black);
+            font-weight: 500;
+        }
+        .service-content li i {
+            color: var(--accent);
+            margin-right: 10px;
+        }
+
+        /* --- SECTION CTA (Appel à l'Action) --- */
+        .section-cta {
+            text-align: center;
+            padding: 60px 0;
+            background-color: var(--accent);
+            color: var(--black);
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+        }
+        .section-cta h3 {
+            margin-bottom: 10px;
+        }
+        .section-cta p {
+            font-size: 1.2em;
+            margin-bottom: 25px;
+        }
+        .dark-btn {
+            background-color: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+        .dark-btn:hover {
+            background-color: var(--dark-grey);
+            transform: translateY(-2px);
+        }
+        
+        /* --- FOOTER (Identique aux autres pages) --- */
+        footer {
+            background-color: var(--black);
+            color: var(--light-grey);
+            padding: 60px 0 20px;
+            text-align: left;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr;
+            gap: 50px;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--dark-grey);
+        }
+        .footer-info h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+        .footer-links h5, .footer-contact h5 {
+            color: var(--white);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .footer-links ul {
+            list-style: none;
+        }
+        .footer-links a {
+            color: var(--light-grey);
+            line-height: 2.2;
+            transition: color var(--transition);
+        }
+        .footer-links a:hover {
+             color: var(--accent);
+        }
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        .footer-contact p {
+            line-height: 2;
+        }
+        .copyright {
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--dark-grey);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 992px) {
+            .service-block, .service-block:nth-child(even) {
+                flex-direction: column;
+                text-align: center;
+            }
+            .service-icon-box {
+                margin-bottom: 20px;
+            }
+            .service-content ul {
+                text-align: left; /* Garder les listes lisibles */
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-links ul {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 15px 0; }
+            nav .container { flex-direction: column; gap: 15px; }
+            nav ul { gap: 10px; }
+            .page-header { padding: 50px 0; }
+            .footer-links ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <h1 class="logo">DB Agency <span class="accent-dot">.</span></h1>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="#" class="active">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="#contact" class="btn-contact primary-btn small-btn">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h2>Services de Design Stratégique 💡</h2>
+            <p>Je propose une approche collaborative pour transformer vos objectifs business en expériences utilisateurs performantes.</p>
+        </div>
+    </header>
+
+    <section class="section-padded">
+        <div class="container">
+            
+            <div class="service-block">
+                <div class="service-icon-box">
+                    <i class="fas fa-sitemap"></i>
+                </div>
+                <div class="service-content">
+                    <h4>Stratégie et Recherche UX</h4>
+                    <p>
+                        Le succès digital commence par une compréhension profonde de vos utilisateurs. J'identifie les points de friction et les opportunités pour aligner le produit sur les besoins réels du marché.
+                    </p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> **Ateliers de co-conception** (Design Sprint).</li>
+                        <li><i class="fas fa-check-circle"></i> **Cartographie du parcours client** (Customer Journey Maps).</li>
+                        <li><i class="fas fa-check-circle"></i> **Wireframing et Prototypage Basse Fidélité**.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-block">
+                <div class="service-icon-box">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <div class="service-content">
+                    <h4>Design d'Interface Utilisateur (UI)</h4>
+                    <p>
+                        Une interface intuitive, c'est une interface qui convertit. Je crée des designs visuellement époustouflants qui optimisent l'ergonomie et renforcent la confiance.
+                    </p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> **Design de Sites Web et Applications** (Mobile & Desktop).</li>
+                        <li><i class="fas fa-check-circle"></i> **Création de Design System** (Figma, Sketch) pour l'évolutivité.</li>
+                        <li><i class="fas fa-check-circle"></i> **Prototypes Haute Fidélité** et Spécifications pour les développeurs.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-block">
+                <div class="service-icon-box">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="service-content">
+                    <h4>Identité Visuelle et Branding</h4>
+                    <p>
+                        Votre marque est la première chose que vos utilisateurs perçoivent. Je développe une identité visuelle forte et cohérente qui vous distingue de la concurrence.
+                    </p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> **Conception de Logo** et Éléments de Base.</li>
+                        <li><i class="fas fa-check-circle"></i> **Développement de Charte Graphique** Complète.</li>
+                        <li><i class="fas fa-check-circle"></i> **Design d'actifs Marketing** (Présentations, cartes de visite digitales).</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="cta-final" class="section-cta bg-accent">
+        <div class="container">
+            <h3>Prêt à Élever Votre Marque au Niveau Supérieur ?</h3>
+            <p>Discutons de vos défis de design et voyons comment DB Agency peut apporter des solutions créatives et efficaces.</p>
+            <a href="#contact" class="btn dark-btn large-btn"><i class="fas fa-paper-plane"></i> Planifier un Appel Découverte</a>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h4>DB Agency <span class="accent-dot">.</span></h4>
+                    <p>Design épuré. Résultats mesurables.</p>
+                    <div class="social-links" style="margin-top: 15px; display: flex; gap: 15px;">
+                        <a href="#" style="color: var(--light-grey); font-size: 1.2em;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: var(--light-grey); font-size: 1.2em;"><i class="fab fa-dribbble"></i></a>
+                        <a href="#" style="color: var(--light-grey); font-size: 1.2em;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h5>Navigation</h5>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h5>Contactez-moi</h5>
+                    <p><i class="fas fa-envelope"></i> contact@dbagency.com</p>
+                    <p><i class="fas fa-phone"></i> +XX XXX XX XX XX</p>
+                    <p style="margin-top: 10px;"><i class="fas fa-map-marker-alt"></i> Basé à [Votre Ville/Région]</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 DB Agency. Tous droits réservés. Design par Dan B.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
